@@ -50,7 +50,7 @@ function removeLine(lineId) {
 function getCars() {
     let elementsOfTable = '';
     cars.forEach((car => {
-    //    console.log(car);
+        console.log(car);
         let color = car.isInStock ? 'green' : 'red';
         const id = car.id;
         let tr = `
