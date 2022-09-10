@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="main.css">
+
+</head>
+<body>
+   <form>
+        <div class="form-group">
+            <label for="carName" >Car name</label>
+            <input type="text" id="carName" placeholder="Car name">
+        </div>
+       <div class="form-group">
+           <label for="carModel" >Car model</label>
+           <input type="text" id="carModel" placeholder="Car model">
+       </div>
+       <div class="form-group">
+           <label for="carPrice" >Car price</label>
+            <input type="text" id="carPrice" placeholder="Car price">
+       </div>
+       <div class="form-group">
+           <label for="carIsInStock" >Car available</label>
+            <input type="checkbox" id="carIsInStock" >
+       </div>
+       <button type="button" onclick="addCarLine()">Add new car</button>
+   </form>
+<!--    <button type="button" onclick="toggleList()">Toggle List</button>-->
+    <table id="table">
+        <thead>
+            <tr>
+                <th>Car name</th>
+                <th>Car Model</th>
+                <th>Price</th>
+                <th>Is in Stock</th>
+                <th>Action</th>
+             </tr>
+        </thead>
+        <tbody class="tbody"></tbody>
+    </table>
+    <script src="main.js"></script>
+</body>
+</html>

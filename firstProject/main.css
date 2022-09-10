@@ -1,0 +1,35 @@
+#table {
+    display: table;
+    width: 100%;
+    border-collapse: collapse
+}
+#table.show {
+    display: table;
+    width: 100%;
+    border-collapse: collapse;
+
+}
+#table .tbody td {
+    text-align: center;
+    padding: 5px 0;
+}
+#table thead tr {
+        border-bottom: 2px solid black;
+}
+.green {
+    background-color: green;
+}
+.red {
+    background-color: red;
+}
+.form-group {
+    display: flex;
+    margin-bottom: 10px;
+}
+label {
+    width: 100px;
+}
+input[type='checkbox'] {
+    padding: 0;
+    margin: 0;
+}
