@@ -1,4 +1,5 @@
 let isShowList = false;
+let currentCarId = 0;
 let cars = [
     {
         id: 1,
@@ -24,6 +25,10 @@ let cars = [
 
 ];
 
+function addToLocalStorage() {
+    localStorage.setItem('cars', JSON.stringify(cars));
+}
+
 function addCarLine() {
     const currentId = Math.floor(Date.now() + Math.random());
     const currentName = document.querySelector("#carName").value;
@@ -39,18 +44,55 @@ function addCarLine() {
     });
     document.querySelectorAll('input').forEach(el => el.value = '');
     document.querySelector('#carIsInStock').checked = false;
-    getCars();
+    getCars(false);
+
 }
 function removeLine(lineId) {
     const isRemoved = confirm("Are you sure to remove this line?");
     if (isRemoved) {cars = cars.filter( carItem => carItem.id !== +lineId);
-        getCars();
+        getCars(false);
     }
 }
-function getCars() {
+
+function editLine(lineId) {
+    currentCarId = +lineId;
+    const modal = document.querySelector('#modalEditCar');
+    modal.style.display = 'block';
+    const currentCar = cars.find(carItem => carItem.id === +lineId);
+    document.querySelector("#editCarName").value = currentCar.name;
+    document.querySelector("#editCarModel").value = currentCar.model;
+    document.querySelector("#editCarPrice").value = currentCar.price;
+    document.querySelector("#editCarIsInStock").checked = currentCar.isInStock;
+}
+
+function modalClose() {
+    const modal = document.querySelector('#modalEditCar');
+    modal.style.display = 'none';
+}
+function updateCarLine() {
+    const editName = document.querySelector("#editCarName").value;
+    const editModel = document.querySelector("#editCarModel").value;
+    const editPrice = document.querySelector("#editCarPrice").value;
+    const editIsInStock = document.querySelector("#editCarIsInStock").checked;
+    cars.forEach(carItem => {
+        if (carItem.id === currentCarId) {
+            carItem.name = editName;
+            carItem.model = editModel;
+            carItem.price = editPrice;
+            carItem.isInStock = editIsInStock;
+        }
+    });
+    modalClose();
+    getCars(false);
+}
+
+function getCars(isFirstTime) {
+    const localStorageCars = localStorage.getItem('cars');
+    if (localStorageCars && isFirstTime) {
+        cars = JSON.parse(localStorageCars)
+    }
     let elementsOfTable = '';
     cars.forEach((car => {
-        console.log(car);
         let color = car.isInStock ? 'green' : 'red';
         const id = car.id;
         let tr = `
@@ -59,15 +101,17 @@ function getCars() {
                 <td>${car.model}</td>
                 <td>${car.price}$</td>
                 <td>${car.isInStock ? 'Yes' : 'No'}</td>
-                <td><button type="button" id="${id}" onclick="removeLine(id)">Remove</button>
+                <td>
+                    <button type="button" id="${id}" onclick="editLine(id)">Edit</button>
+                    <button type="button" id="${id}" onclick="removeLine(id)">Remove</button>
                 </td>
             </tr>
         `
         elementsOfTable += tr;
     }));
-    // console.log(elementsOfTable)
     const tbody = document.querySelector('.tbody');
     tbody.innerHTML = elementsOfTable;
+    addToLocalStorage();
 }
 
 function toggleList() {
@@ -80,5 +124,5 @@ function toggleList() {
     }
 
 }
-getCars();
+getCars(true);
 

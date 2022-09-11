@@ -10,7 +10,31 @@
 
 </head>
 <body>
-   <form>
+   <div class="modal" id="modalEditCar">
+       <div class="modal-content">
+           <span class="modal-close" onclick="modalClose()">&times;</span>
+           <form>
+               <div class="form-group">
+                   <label for="editCarName" >Car name</label>
+                   <input type="text" id="editCarName" placeholder="Car name">
+               </div>
+               <div class="form-group">
+                   <label for="editCarModel" >Car model</label>
+                   <input type="text" id="editCarModel" placeholder="Car model">
+               </div>
+               <div class="form-group">
+                   <label for="editCarPrice" >Car price</label>
+                   <input type="text" id="editCarPrice" placeholder="Car price">
+               </div>
+               <div class="form-group">
+                   <label for="editCarIsInStock" >Car available</label>
+                   <input type="checkbox" id="editCarIsInStock" >
+               </div>
+               <button type="button" onclick="updateCarLine()">Update current car</button>
+           </form>
+       </div>
+   </div>
+    <form>
         <div class="form-group">
             <label for="carName" >Car name</label>
             <input type="text" id="carName" placeholder="Car name">
